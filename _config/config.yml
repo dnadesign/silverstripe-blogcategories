@@ -1,14 +1,14 @@
 BlogTree:
   extensions:
-    -  BlogCategoryTree
+    - BlogCategoryTree
 
 BlogTree_Controller:
   extensions:
-    -  BlogCategoryTreeExtension_Controller
+    - BlogCategoryTreeExtension_Controller
 
 BlogEntry:
   extensions:
-    -  BlogCategoryEntry
+    - BlogCategoryEntry
 
 BlogCategory:
-  limit_to_holder:  true
+  limit_to_holder: true

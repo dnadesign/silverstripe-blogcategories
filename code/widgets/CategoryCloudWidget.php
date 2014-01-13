@@ -15,23 +15,22 @@ if(class_exists('Widget')) {
 		
 		private static $db = array(
 			'Title' => 'Varchar',
-            'Limit'=>'Int'			
+			'Limit'=>'Int'			
 		);
 
 		private static $defaults = array(
 			'Title' => 'Category Cloud',
-		    'Limit'=> 10
+			'Limit'=> 10
 		);
 
 		private static $cmsTitle = 'Category Cloud';
 		
 		private static $description = 'Shows a category cloud of categories on your blog.';
 
-		function getCMSFields() {
+		public function getCMSFields() {
 			$fields = parent::getCMSFields(); 
 
 			$fields->merge(
-
 				new FieldList(
 					new TextField('Title', _t('CategoryCloudWidget.TILE', 'Title')),
 			        new NumericField('Limit', _t('CategoryCloudWidget.LIMIT', 'Limit'))
@@ -39,32 +38,29 @@ if(class_exists('Widget')) {
 			);
 
 			$this->extend('updateCMSFields', $fields);
-
 			return $fields;
 		}
 
-		function Title() {
+		public function Title() {
 			return $this->Title ? $this->Title : _t('CategoryCloudWidget.DEFAULTTITLE', 'Category Cloud');
 		}
 		
-		function getBlogCategoryCloud($limit = 10){
-		    $container = BlogTree::current();
-		    
-            $cloud = BlogCategoryCloud::create();
-            
-            if(Config::inst()->get('BlogCategory', 'limit_to_holder')) {
-                $cloud->setHolderId($container->ID);
-            }            
-            
-            if($limit) $cloud->setLimit($limit);
-            
-            if($this->Limit >= 1) $cloud->setLimit($this->Limit);
-            
-            return $cloud;
+		public function getBlogCategoryCloud($limit = 10){
+			$container = BlogTree::current();
+
+			$cloud = BlogCategoryCloud::create();
+
+			if(Config::inst()->get('BlogCategory', 'limit_to_holder')) {
+				$cloud->setHolderId($container->ID);
+			}
+
+			if($limit) $cloud->setLimit($limit);
+
+			if($this->Limit >= 1) $cloud->setLimit($this->Limit);
+
+			return $cloud;
 		}
 		
 	}
 	
 }
-
-?>

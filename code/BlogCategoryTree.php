@@ -71,11 +71,12 @@ class BlogCategoryTreeExtension_Controller extends DataExtension {
 			$list = new PaginatedList($entries, Controller::curr()->request);
 									 
 			$data =array(
-						'BlogEntries'=> $list,
-						'BlogCategory' => $category->getField('Title')
-					);
+				'BlogEntries'=> $list,
+				'BlogCategory' => $category->getField('Title')
+				
+			);
 			
-			return $this->owner->customise($data)->renderWith(array('BlogHolder', 'Page'));
+			return $this->owner->customise($data)->renderWith(array('BlogTree', 'Page'));
 			
 		} else {
 			
